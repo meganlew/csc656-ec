@@ -31,6 +31,7 @@ void my_dgemv(int n, double* A, double* x, double* y) {
          sum = y[i] + A[i*n+j] * x[j];
       }
    }
+}
 
 
 
