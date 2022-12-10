@@ -24,13 +24,10 @@ void my_dgemv(int n, double* A, double* x, double* y) {
    // insert your dgemv code here. you may need to create additional parallel regions,
    // and you may want to comment out the above parallel code block that prints out
    // nthreads and thread_id so as to not taint your timings
-   double sum;
    for(int i = 0; i < n; i++){
-       sum = y[i];
-       #pragma omp parallel for reduction (+:sum)
+       #pragma omp parallel for reduction (+:y[i])
       for(int j = 0; j < n; j++){
-         sum = y[i] + A[i*n+j] * x[j];
+        y[i] += A[i*n+j] * x[j];
       }
-      y[i]=sum;
    }
 }
